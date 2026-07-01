@@ -1,17 +1,89 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Scary</title>
     <meta charset="UTF-8">
-    <meta name="description" content="I dont know">
-    <meta name="author" content="Ziwara">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href=".img/tablogo.png">
-    <link rel="stylesheet" href=".stylesheet/main_page.css">
-</head>
+    <title>Surprise!</title>
+    <link rel="icon" href="icon.jpeg" type="image/jpeg">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
+        /* Images container */
+        .image-container {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* The fade in and out animation for Freddy */
+        .flicker {
+            animation: fadeBlink 1.5s infinite alternate;
+        }
+
+        @keyframes fadeBlink {
+            0% { opacity: 0; }
+            30% { opacity: 0.2; }
+            50% { opacity: 1; }
+            70% { opacity: 0.3; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
 <body>
-<!--Image-->
-    <img src=".img/fnaf.jpg" class="fullscreen-element">
+
+    <img id="fnafImage" class="image-container flicker" src="fnaf.jpg" alt="Freddy">
+    <img id="jumpscareImage" class="image-container" src="jumpscare.jpg" alt="Jumpscare">
+
+    <audio id="deathSong" src="YTMP3GG_YouTube_Fnaf-Freddys-Death-Song_Media_vgzImKzuyO8_006_128k.mp3"></audio>
+    <audio id="jumpscareSound" src="YTMP3GG_YouTube_Fnaf-6-jumpscare-sound_Media_q2idDfQA1mg_009_128k.mp3"></audio>
+    <audio id="hevAbiSong" src="YTMP3GG_YouTube_Alam-Mo-Ba-Girl-Hev-Abi-Lyrics_Media_1QcpPW91qZY_009_128k.mp3"></audio>
+
+    <script>
+        const fnafImage = document.getElementById('fnafImage');
+        const jumpscareImage = document.getElementById('jumpscareImage');
+        const deathSong = document.getElementById('deathSong');
+        const jumpscareSound = document.getElementById('jumpscareSound');
+        const hevAbiSong = document.getElementById('hevAbiSong');
+
+        // This runs the moment the webpage is fully loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            fnafImage.style.display = 'block';
+            
+            // The browser will likely block this play() request unless you change site settings
+            deathSong.play().catch(error => {
+                console.log("Autoplay was blocked by the browser. A click is required.", error);
+                // Sneaky workaround: if autoplay fails, make clicking anywhere on the screen start it
+                document.body.addEventListener('click', () => {
+                    deathSong.play();
+                }, { once: true });
+            });
+        });
+
+        // Step 2: Death song ends -> Trigger Jumpscare
+        deathSong.addEventListener('ended', () => {
+            fnafImage.style.display = 'none';
+            jumpscareImage.style.display = 'block';
+            jumpscareSound.play();
+        });
+
+        // Step 3: Jumpscare ends -> Play Hev Abi
+        jumpscareSound.addEventListener('ended', () => {
+            hevAbiSong.play();
+        });
+    </script>
+</body>
 </html>

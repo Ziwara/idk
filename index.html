@@ -47,6 +47,7 @@
 
     <img id="fnafImage" class="image-container flicker" src="fnaf.jpg" alt="Freddy">
     <img id="jumpscareImage" class="image-container" src="jumpscare.jpg" alt="Jumpscare">
+    <img id="jumpscareImage" class="image-container" src="IMG_0441.jpeg." alt="Jumpscare1">
 
     <audio id="deathSong" src="YTMP3GG_YouTube_Fnaf-Freddys-Death-Song_Media_vgzImKzuyO8_006_128k.mp3"></audio>
     <audio id="jumpscareSound" src="YTMP3GG_YouTube_Fnaf-6-jumpscare-sound_Media_q2idDfQA1mg_009_128k.mp3"></audio>
@@ -55,6 +56,7 @@
     <script>
         const fnafImage = document.getElementById('fnafImage');
         const jumpscareImage = document.getElementById('jumpscareImage');
+        const jumpscareImage1 = document.getElementById('jumpscareImage1')
         const deathSong = document.getElementById('deathSong');
         const jumpscareSound = document.getElementById('jumpscareSound');
         const hevAbiSong = document.getElementById('hevAbiSong');
@@ -82,6 +84,8 @@
 
         // Step 3: Jumpscare ends -> Play Hev Abi
         jumpscareSound.addEventListener('ended', () => {
+            jumpscareImage.style.display = 'none';
+            jumpscareImage1.style.display = 'block';
             hevAbiSong.play();
         });
     </script>
